@@ -35,10 +35,31 @@ helpText2 = '''复制上面全部代码，然后打开https://www.bigfun.cn/tool
 1.	请用自己手机上的 bigfun 客户端登录并打开一次 pcr 团队战工具，确保手机app上能正确显示内容。
 2.	请发送 init 初始化 bot'''
 
+helpText3 = '''表格预约地址 https://docs.qq.com/sheet/DREJtUkZubGpqdFhQ?tab=BB08J2
+ 作业网地址 https://www.caimogu.cc/gzlj.html
+ 分刀器地址 https://pcr.satroki.tech/teams
+ bot暂时仅作为boss提醒查询出刀情况等使用'''
+
 @sv.on_fullmatch('自动报刀帮助')
 async def help(bot, ev):
     await bot.send(ev, helpText1)
     await bot.send(ev, helpText2)
+
+@sv.on_fullmatch('作业')
+async def help(bot, ev):
+    await bot.send(ev, helpText3)
+
+
+@sv.on_fullmatch('预约')
+async def help(bot, ev):
+    await bot.send(ev, helpText3)
+
+
+@sv.on_fullmatch('预约表')
+async def help(bot, ev):
+    await bot.send(ev, helpText3)
+
+
 
 @sv.on_fullmatch('今日出刀')
 async def get_today_stat(bot, ev):
@@ -108,6 +129,9 @@ async def get_boss_status(bot, ev):
         boss_hp = boss_info['current_life']
         boss_max_hp = boss_info['total_life']
         await update_boss(boss_num, boss_info['lap_num'],group_id)
+        if boss_info['lap_num'] >= 45:
+            stage_char = 'E'
+            stage_num = 5
         status_str = f'''{clan_info['name']} 排名{clan_info['last_ranking']}
 当前进度：
 {stage_char}面{stage_num}阶段 {boss_info['lap_num']}周目{boss_num}王 {boss_info['name']}
@@ -140,7 +164,7 @@ async def has_sl(bot, ev):
     else:
         await bot.send(ev, '数据库错误 请查看log')
 
-@sv.on_rex(r'^预约\s?(\d)\s?(\S*)')
+@sv.on_rex(r'^预了个约\s?(\d)\s?(\S*)')
 async def subscirbe(bot, ev):
     group_id = ev.group_id
     uid = ev.user_id
@@ -161,7 +185,7 @@ async def subscirbe(bot, ev):
     else:
         await bot.send(ev, '预约失败', at_sender=True)
 
-@sv.on_fullmatch('预约表', only_to_me=False)
+@sv.on_fullmatch('预了个约表', only_to_me=False)
 async def form_subscribe(bot, ev):
     i = 1
     a = 0
@@ -184,7 +208,8 @@ async def form_subscribe(bot, ev):
                     subscribers.append(f'{info[name]}:{subscirbe_text[text]}')
                 else :
                     subscribers.append(info[name])
-                FormSubscribe = FormSubscribe + f'\n{subscribers}预约了{i}王'
+                FormSubscribe = FormSubscribe + f'\n{i}王：{subscribers}'
+                #FormSubscribe = FormSubscribe + f'\n{subscribers}预约了{i}王'
         subscribers = []
         i = i+1 
     if a == 5:
@@ -323,7 +348,7 @@ async def update_boss_list(bot, ev):
         
         await bot.send(ev, f"已更新{constellation} BOSS 列表")
 
-@sv.on_prefix('注册')
+@sv.on_prefix('我要注册')
 async def register(bot, ev):
     uid = None
     name = None
