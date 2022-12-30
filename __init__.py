@@ -129,9 +129,9 @@ async def get_boss_status(bot, ev):
         boss_hp = boss_info['current_life']
         boss_max_hp = boss_info['total_life']
         await update_boss(boss_num, boss_info['lap_num'],group_id)
-        if boss_info['lap_num'] >= 45:
-            stage_char = 'E'
-            stage_num = 5
+#        if boss_info['lap_num'] >= 45:
+#            stage_char = 'E'
+#            stage_num = 5
         status_str = f'''{clan_info['name']} 排名{clan_info['last_ranking']}
 当前进度：
 {stage_char}面{stage_num}阶段 {boss_info['lap_num']}周目{boss_num}王 {boss_info['name']}
