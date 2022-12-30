@@ -136,12 +136,12 @@ async def update_boss(boss, lap_num, group_id, send_msg=False):
         bot = nonebot.get_bot()
         subDao.update_boss(boss,group_id)
         if send_msg:
-            stage0, stage1 = get_boss_stage(lap_num)
-            if lap_num >= 45:
-                stage1 = 'E'
-                stage0 = 5
+            stage = get_boss_stage(lap_num)
+#            if lap_num >= 45:
+#                stage1 = 'E'
+#                stage0 = 5
             msg = f'{curr_boss}王已被击败\n' if curr_boss else 'BOSS状态更新\n'
-            msg += f'当前进度：{stage1]}面{stage0}阶段 {lap_num}周目{boss}王'
+            msg += f'当前进度：{stage[1]}面{stage[0]}阶段 {lap_num}周目{boss}王'
             await bot.send_group_msg(group_id=group_id, message=msg)
 
         # 处理挂树
@@ -176,8 +176,10 @@ def get_boss_stage(lap_num):
         return (2, 'B')
     elif lap_num <= 34:
         return (3, 'C')
-    else :
+    elif lap_num <= 44:
         return (4, 'D')
+    else :
+        return (5, 'E')
 
 
 async def notify_subscribe(boss,group_id):
