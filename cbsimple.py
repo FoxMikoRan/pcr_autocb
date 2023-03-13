@@ -34,9 +34,12 @@ group_ids = []
 on_tree = {}
 
 #API
-MEMBER_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-day-report/a&size=30"
-BOSS_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-day-report-collect/a"
-LIST_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-boss-report-collect/a"
+#MEMBER_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-day-report/a&size=30"
+#BOSS_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-day-report-collect/a"
+#LIST_API = "https://www.bigfun.cn/api/feweb?target=gzlj-clan-boss-report-collect/a"
+MEMBER_API = "https://bigfun.bilibili.com/api/feweb?target=gzlj-clan-day-report/a&size=30"
+BOSS_API = "https://bigfun.bilibili.com/api/feweb?target=gzlj-clan-day-report-collect/a"
+LIST_API = "https://bigfun.bilibili.com/api/feweb?target=gzlj-clan-boss-report-collect/a"
 
 #载入群设置
 def load_group_config(group_id: str) -> int:
